@@ -1,0 +1,16 @@
+{
+  "example": true,
+  "note": "人工构造的接口格式示意，并非现场运行结果或实验指标。",
+  "response": {
+    "status": "success",
+    "dataset": "PaviaU",
+    "method": "fisher",
+    "k": 10,
+    "selected_bands": [2, 11, 19, 28, 37, 46, 58, 69, 81, 96],
+    "index_base": 0,
+    "train_samples": 0,
+    "band_count": 103,
+    "selection_seconds": 0.0
+  }
+}
+

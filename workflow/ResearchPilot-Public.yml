@@ -1,0 +1,636 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: workflow
+  name: 论文总结助手
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.2.26@6c75a6b95954ef3c97f0d3225bad7cbfbff7cdbc82d9425074aae121cc056a64
+    version: null
+kind: app
+version: 0.7.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload: {}
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: start
+        targetType: question-classifier
+      id: 1793365112401-source-1793373031152-target
+      source: '1793365112401'
+      sourceHandle: source
+      target: '1793373031152'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1793373031152-1-1793544475253-target
+      source: '1793373031152'
+      sourceHandle: '1'
+      target: '1793544475253'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: question-classifier
+        targetType: http-request
+      id: 1793373031152-1793715829973-1793711161568-target
+      source: '1793373031152'
+      sourceHandle: '1793715829973'
+      target: '1793711161568'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: question-classifier
+        targetType: llm
+      id: 1793373031152-2-1793715954639-target
+      source: '1793373031152'
+      sourceHandle: '2'
+      target: '1793715954639'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: llm
+        targetType: end
+      id: 1793373525830-source-1793365292670-target
+      source: '1793373525830'
+      sourceHandle: source
+      target: '1793365292670'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: llm
+        targetType: end
+      id: 1793373557984-source-1793373756046-target
+      source: '1793373557984'
+      sourceHandle: source
+      target: '1793373756046'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1793544475253-source-1793373525830-target
+      source: '1793544475253'
+      sourceHandle: source
+      target: '1793373525830'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: http-request
+        targetType: llm
+      id: 1793711161568-source-1793373557984-target
+      source: '1793711161568'
+      sourceHandle: source
+      target: '1793373557984'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: llm
+        targetType: end
+      id: 1793715954639-source-1793715983416-target
+      source: '1793715954639'
+      sourceHandle: source
+      target: '1793715983416'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables:
+        - default: ''
+          hint: ''
+          label: 论文内容
+          max_length: 5000
+          options: []
+          placeholder: ''
+          required: true
+          type: paragraph
+          variable: lunwen
+      height: 108
+      id: '1793365112401'
+      position:
+        x: -94.04761904761904
+        y: 75
+      positionAbsolute:
+        x: -94.04761904761904
+        y: 75
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        outputs:
+        - value_selector:
+          - '1793373525830'
+          - text
+          value_type: string
+          variable: summary
+        selected: false
+        title: 输出
+        type: end
+      height: 88
+      id: '1793365292670'
+      position:
+        x: 1047.8571428571431
+        y: -7.761904761904745
+      positionAbsolute:
+        x: 1047.8571428571431
+        y: -7.761904761904745
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        classes:
+        - id: '1'
+          label: 论文问题
+          name: 用户的问题涉及论文阅读、文献总结、研究背景、研究方法、实验结果、创新点、学术研究等内容，不要求执行算法。
+        - id: '2'
+          label: 代码问题
+          name: 用户的问题涉及 Python、编程、代码解释、程序报错、算法实现、调试或代码优化等内容。
+        - id: '1793715829973'
+          label: 波段选择任务
+          name: 当用户要求执行高光谱波段选择算法、获取波段索引、指定选带数量 K、调用 Fisher/mRMR/MVPCA/IE 等算法，或解释实际选带结果时，选择此类别。即使涉及高光谱研究，也优先归为波段选择任务，而不是论文问题。
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.8-max
+          provider: langgenius/tongyi/tongyi
+        query_variable_selector: []
+        selected: false
+        title: 问题分类器
+        type: question-classifier
+        vision:
+          enabled: false
+      height: 219
+      id: '1793373031152'
+      position:
+        x: 201.28571428571422
+        y: 96
+      positionAbsolute:
+        x: 201.28571428571422
+        y: 96
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1793544475253'
+          - result
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.8-max
+          provider: langgenius/tongyi/tongyi
+        model_selector: null
+        prompt_template:
+        - id: ed1e04d6-7288-4686-8d28-def2e8a8bf24
+          role: system
+          text: '你是一名科研论文分析助手，擅长人工智能、计算机视觉和高光谱遥感领域。
+
+
+            任务：根据用户提供的论文内容，用中文进行结构化总结。
+
+
+            请按照以下格式输出：
+
+            1. 研究背景：论文为什么开展这项研究？
+
+            2. 研究目的：论文希望解决什么问题？
+
+            3. 研究方法：采用什么技术路线和核心算法？
+
+            4. 实验设计：使用了哪些数据集和评价指标？
+
+            5. 实验结果：论文报告了什么结果？
+
+            6. 创新点：与已有方法相比有哪些改进？
+
+
+            要求：
+
+            - 使用清晰易懂的中文。
+
+            - 专业术语提供简短解释。
+
+            - 严格依据提供的论文内容回答。
+
+            - 不得编造实验数据、方法或研究结论。
+
+            - 原文没有的信息标记为“原文未提供”。
+
+            -模型优先依据检索内容回答，找不到证据时说明信息不足。'
+        - id: 2959e9a1-850b-48ed-ad53-cef7151c7d7d
+          role: user
+          text: '请根据以下用户提供的内容，回答论文相关问题，并按照 SYSTEM 中的规则进行分析。
+
+
+            用户内容：
+
+            {{#1793365112401.lunwen#}}
+
+            {{#context#}}'
+        reasoning_format: separated
+        selected: false
+        title: LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1793373525830'
+      position:
+        x: 746.1428571428571
+        y: -7.761904761904745
+      positionAbsolute:
+        x: 746.1428571428571
+        y: -7.761904761904745
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: '
+
+          '
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.8-max
+          provider: langgenius/tongyi/tongyi
+        model_selector: null
+        prompt_template:
+        - id: f93efe01-83dd-48a7-a38e-dd6f9cc74eb7
+          role: system
+          text: '你是一名专业的高光谱遥感分析助手，负责解释高光谱波段选择算法的实际运行结果。
+
+            你可以分析 Fisher、mRMR、MVPCA、IE、Random、Uniform 等波段选择算法的输出。
+
+            你的任务：
+
+            根据 HTTP 工具返回的数据，说明使用的数据集、算法名称和波段选择数量 K。
+
+            完整列出 selected_bands，并说明波段索引从 0 开始。
+
+            如果结果包含 train_samples、band_count、selection_seconds，解释训练样本数量、原始波段数和算法运行耗时。
+
+            简要解释所使用算法的基本原理，以及选出的波段在该方法下的含义。
+
+            使用清晰、专业、适合初学者理解的中文回答。
+
+            严格要求：
+
+            所有具体波段索引和运行数据必须来自 HTTP 工具结果，不能自行编造。
+
+            波段选择成功不代表分类准确率提高。没有 OA、AA、F1、Kappa 等真实实验指标时，不得编造。
+
+            不得将波段索引直接当成波长（nm）。
+
+            如果工具返回失败或缺少 selected_bands，应说明无法确认选带结果，不得声称算法已成功执行。
+
+            如果用户要求的算法或 K 与 HTTP 工具实际执行参数不一致，应明确指出不一致，不得将工具结果冒充为用户所要求的结果。
+
+            不要透露没有提供的训练数据或模型细节。
+
+            推荐输出格式：
+
+            执行结果：数据集、算法、K、执行状态
+
+            选中波段：完整索引
+
+            算法说明：简要解释
+
+            注意事项：说明目前是否包含分类性能评估'
+        - id: 6b229bbc-510e-4853-af2f-f972a5f5a98e
+          role: user
+          text: '请根据用户问题和 HTTP 工具返回的数据，生成中文分析结果。
+
+
+            用户的问题：
+
+            {{{#1793365112401.lunwen#}}}}
+
+
+            波段选择工具返回的结果：
+
+            {{{#1793711161568.body#}}}}
+
+            '
+        reasoning_format: separated
+        selected: false
+        title: LLM 2
+        type: llm
+        vision:
+          enabled: false
+      height: 115
+      id: '1793373557984'
+      position:
+        x: 810.4285714285716
+        y: 386.0952380952381
+      positionAbsolute:
+        x: 810.4285714285716
+        y: 386.0952380952381
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        outputs:
+        - value_selector:
+          - '1793373557984'
+          - text
+          value_type: string
+          variable: output
+        selected: false
+        title: 输出 2
+        type: end
+      height: 88
+      id: '1793373756046'
+      position:
+        x: 1083.8571428571427
+        y: 386.0952380952381
+      positionAbsolute:
+        x: 1083.8571428571427
+        y: 386.0952380952381
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        dataset_ids:
+        - REBIND_KNOWLEDGE_BASE_AFTER_IMPORT
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: qwen3-vl-rerank
+            provider: langgenius/tongyi/tongyi
+          score_threshold: null
+          top_k: 4
+          weights: null
+        query_attachment_selector: []
+        query_variable_selector:
+        - '1793365112401'
+        - lunwen
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索
+        type: knowledge-retrieval
+      height: 51
+      id: '1793544475253'
+      position:
+        x: 446.1428571428571
+        y: -7.761904761904745
+      positionAbsolute:
+        x: 446.1428571428571
+        y: -7.761904761904745
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-133
+            key: ''
+            type: text
+            value: "{\n  \"dataset\": \"PaviaU\",\n  \"method\": \"fisher\",\n  \"k\": 10\n}"
+          type: json
+        headers: Content-Type:application/json
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求
+        type: http-request
+        url: https://researchpilot-api.example.invalid/select-bands
+        variables: []
+      height: 137
+      id: '1793711161568'
+      position:
+        x: 515.190476190476
+        y: 356.3333333333333
+      positionAbsolute:
+        x: 515.190476190476
+        y: 356.3333333333333
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.8-max
+          provider: langgenius/tongyi/tongyi
+        model_selector: null
+        prompt_template:
+        - id: 7cd8ecd3-d407-4ea0-b25f-cc4a5b33c0c1
+          role: system
+          text: '你是一名专业的 Python 编程与 AI 工程开发助手，擅长帮助初学者解决编程和项目开发问题。
+
+            你的专业领域包括：
+
+            Python 基础语法、函数、类和模块
+
+            NumPy、SciPy、Pandas、scikit-learn
+
+            FastAPI、REST API、HTTP、JSON
+
+            Dify、LLM、RAG、Agent、工具调用
+
+            高光谱数据处理和波段选择算法
+
+            Windows、Conda、pip、Docker 环境配置
+
+            回答要求：
+
+            首先理解用户遇到的具体问题，直接给出解决方案。
+
+            如果涉及代码错误，解释报错含义、可能原因和修复方法。
+
+            如果需要修改代码，提供可以复制的代码示例，并说明应放在哪个文件中。
+
+            优先给出最简单、最容易验证的解决方案，避免引入不必要的复杂技术。
+
+            对初学者不熟悉的术语进行简短解释。
+
+            如果提供操作命令，明确区分 Windows PowerShell、CMD 和 Python 代码。
+
+            不要假装运行过用户的代码，也不要编造测试结果。
+
+            如果缺少关键代码、日志或环境信息，应明确指出无法确定的部分。
+
+            回答尽量分步骤，先解决当前问题，再介绍必要的扩展知识。
+
+            输出风格：
+
+            使用中文。
+
+            专业、清晰、简洁。
+
+            必要时提供代码块。
+
+            不要为了增加篇幅重复解释已经明确的内容。'
+        - id: b7be6495-e7d9-40c7-b930-9b7b96e5abf3
+          role: user
+          text: '请分析并回答以下编程或技术问题。
+
+            用户问题：
+
+            {{{#1793365112401.lunwen#}}}}
+
+            如果涉及代码，请解释其作用；如果涉及错误，请分析原因并提供具体解决步骤。
+
+            请根据已提供的信息回答，不要假设已经执行了任何未实际运行的代码。'
+        reasoning_format: separated
+        selected: false
+        title: LLM 3
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1793715954639'
+      position:
+        x: 509.23809523809507
+        y: 177.52380952380955
+      positionAbsolute:
+        x: 509.23809523809507
+        y: 177.52380952380955
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        outputs:
+        - value_selector:
+          - '1793715954639'
+          - text
+          value_type: string
+          variable: daima
+        selected: false
+        title: 输出 3
+        type: end
+      height: 88
+      id: '1793715983416'
+      position:
+        x: 811.2380952380951
+        y: 177.52380952380955
+      positionAbsolute:
+        x: 811.2380952380951
+        y: 177.52380952380955
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    viewport:
+      x: 96.76441489096112
+      y: 210.04358202865694
+      zoom: 0.8040888484979246
+  rag_pipeline_variables: []
