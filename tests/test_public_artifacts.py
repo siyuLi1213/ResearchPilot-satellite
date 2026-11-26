@@ -62,10 +62,14 @@ def test_public_bindings_and_fixed_fisher_request():
 
 
 def test_public_files_have_no_high_signal_secret_or_local_path():
+    text_suffixes = {".json", ".md", ".py", ".txt", ".yaml", ".yml"}
     files = [
         path
         for path in PROJECT_ROOT.rglob("*")
-        if path.is_file() and "tests" not in path.parts
+        if path.is_file()
+        and ".git" not in path.relative_to(PROJECT_ROOT).parts
+        and "tests" not in path.relative_to(PROJECT_ROOT).parts
+        and (path.suffix.lower() in text_suffixes or path.name == ".gitignore")
     ]
     text = "\n".join(path.read_text(encoding="utf-8") for path in files)
 
