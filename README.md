@@ -1,8 +1,8 @@
-# ResearchPilot-Dify
+# ResearchPilot-satellite
 
-ResearchPilot-Dify 是一个面向科研辅助场景的 Dify Workflow 作品集展示。它呈现了如何在一个可视化工作流中路由三类任务，并通过 RAG、LLM 与 FastAPI HTTP Tool Calling 串联论文问答、代码问答和高光谱波段选择。
+ResearchPilot-satellite 是一个面向科研辅助场景的 Dify Workflow 作品展示。它呈现了如何在一个可视化工作流中路由三类任务，并通过 RAG、LLM 与 FastAPI HTTP Tool Calling 串联论文问答、代码问答和高光谱波段选择。
 
-本仓库面向 AI 应用开发实习岗位的技术评审：重点展示工作流设计、系统边界、接口契约和发布前安全处理，不提供私有科研算法、数据集或未发表实验结果。
+本仓库重点展示工作流设计、系统边界、接口契约和发布前安全处理，不提供私有科研算法、数据集或未发表实验结果。
 
 ## 三条工作流
 
@@ -17,18 +17,14 @@ ResearchPilot-Dify 是一个面向科研辅助场景的 Dify Workflow 作品集�
 - **Dify Workflow**：输入、分类、分支编排、知识检索、HTTP 调用和结果生成。
 - **RAG**：论文资料召回；知识库内容及标识不随仓库公开。
 - **FastAPI**：私有环境中的 `/health` 与 `/select-bands` 接口适配层。
-- **neurospec-agent（私有）**：真实 Fisher 等算法、PaviaU 数据读取和固定训练划分。
-
-这不是自主 Agent Harness，也没有使用 LangGraph。工作流不会自主规划工具链；它执行预先定义的分类与分支。真实 Fisher 依赖 Python 3.14、私有 `neurospec-agent`、数据集与既有训练划分，本公开仓库不能独立执行真实算法。
-
+- neurospec-agent：真实 Fisher 等算法、PaviaU 数据读取和固定训练划分。
 ## 仓库内容
 
-```text
-ResearchPilot-Dify/
+ResearchPilot-satellite/
 ├─ workflow/ResearchPilot-Public.yml
 ├─ docs/architecture.md
 ├─ docs/publication-checklist.md
-├─ screenshots/dify-workflow-demo.png
+├─ screenshots/workflow.png
 ├─ screenshots/README.md
 ├─ examples/request.json
 ├─ examples/response.example.json
@@ -57,7 +53,7 @@ ResearchPilot-Dify/
 }
 ```
 
-私有 FastAPI 适配层接受 `POST /select-bands`。公开工作流仍固定发送上述参数，以便评审者清楚看到真实接口调用的位置；是否允许用户动态选择参数属于后续功能，不在本次完成范围。
+私有 FastAPI 适配层接受 `POST /select-bands`。公开工作流仍固定发送上述参数，以便评审者清楚看到真实接口调用的位置；K为可以调节的选择波段数。
 
 ## Dify 导入验证
 
@@ -67,9 +63,6 @@ ResearchPilot-Dify/
 
 当前验证范围仅包括 DSL 导入和工作流结构，不代表知识库检索、LLM 调用或 HTTP/FastAPI 接口已经完成端到端运行验证。实际部署仍需重新绑定知识库、模型提供商、凭据和服务地址。
 
-## 发布状态
-
-本目录已按公开作品集方向脱敏，但不应在完成人工复核前直接发布。请先阅读 [安全审查](reports/security-review.md)、[验证报告](reports/validation.md) 和 [发布检查表](docs/publication-checklist.md)。
 
 可在安装 `PyYAML` 与 `pytest` 的本地环境运行：
 
