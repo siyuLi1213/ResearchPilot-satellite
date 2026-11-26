@@ -51,5 +51,5 @@ flowchart LR
 
 ## 可迁移性说明
 
-公开 DSL 使用保留域名 `researchpilot-api.example.invalid`，避免泄露或误连本地服务。知识库 ID 使用显式占位值。两者均需在导入后的 Dify UI 中重新绑定。虽然 YAML 和图结构已检查，当前尚未在目标 Dify 版本中完成导入验证。
+公开 DSL 使用保留域名 `researchpilot-api.example.invalid`，避免泄露或误连本地服务。知识库 ID 使用显式占位值。两者均需在导入后的 Dify UI 中重新绑定。公开 DSL 已在本地 Dify 界面成功导入并核对图结构；该结论不代表知识库、LLM 或 HTTP 接口已完成运行验证。
 

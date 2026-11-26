@@ -28,6 +28,7 @@ ResearchPilot-Dify/
 ├─ workflow/ResearchPilot-Public.yml
 ├─ docs/architecture.md
 ├─ docs/publication-checklist.md
+├─ screenshots/dify-workflow-demo.png
 ├─ screenshots/README.md
 ├─ examples/request.json
 ├─ examples/response.example.json
@@ -39,7 +40,7 @@ ResearchPilot-Dify/
 
 ## 导入后设置
 
-1. 在 Dify 导入 `workflow/ResearchPilot-Public.yml`。当前仅验证了 YAML 解析与图结构，**未验证 Dify UI 实际导入**。
+1. 在 Dify 导入 `workflow/ResearchPilot-Public.yml`。公开 DSL 已在本地 Dify 界面成功导入；在其他环境使用时仍需按下列步骤重新配置。
 2. 在“知识检索”节点中移除占位 ID，并重新绑定你有权使用的论文知识库。
 3. 为问题分类器和三个 LLM 节点配置可用的模型提供商与模型凭据；仓库不包含凭据。
 4. 将 HTTP Request 节点的 `https://researchpilot-api.example.invalid/select-bands` 改为部署环境可访问的 HTTPS 地址。
@@ -57,6 +58,14 @@ ResearchPilot-Dify/
 ```
 
 私有 FastAPI 适配层接受 `POST /select-bands`。公开工作流仍固定发送上述参数，以便评审者清楚看到真实接口调用的位置；是否允许用户动态选择参数属于后续功能，不在本次完成范围。
+
+## Dify 导入验证
+
+公开 DSL 已在本地 Dify 界面成功导入。截图可核对 10 个节点、9 条连线，以及论文 RAG、代码问答、波段选择三条完整分支；HTTP Request 节点使用脱敏占位地址。
+
+![Dify Workflow 导入验证](screenshots/dify-workflow-demo.png)
+
+当前验证范围仅包括 DSL 导入和工作流结构，不代表知识库检索、LLM 调用或 HTTP/FastAPI 接口已经完成端到端运行验证。实际部署仍需重新绑定知识库、模型提供商、凭据和服务地址。
 
 ## 发布状态
 
