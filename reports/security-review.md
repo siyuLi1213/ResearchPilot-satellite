@@ -1,33 +1,39 @@
 # 安全审查
 
-## 范围
+审查日期：2026-11-26（Asia/Seoul）
 
-审查目标仅为本作品集输出目录。原始 DSL、FastAPI 后端和私有科研项目均按只读方式检查，没有修改。
+## 公开范围
 
-## 已执行的脱敏
+- Dify Workflow DSL、结构截图和接口示例。
+- FastAPI 请求/响应模型及 `/health`、`/select-bands` 路由。
+- 从原科研项目逐文件复制且未改写的 `base.py`、Fisher、mRMR、MVPCA、Information Entropy、Random、Uniform 模块。
+- 仅使用确定性合成矩阵的演示适配器和单元测试。
 
-- 私有 Dify 知识库 ID 替换为 `REBIND_KNOWLEDGE_BASE_AFTER_IMPORT`。
-- 本地 Docker 主机 URL 替换为 `https://researchpilot-api.example.invalid/select-bands`。
-- 未复制 FastAPI 源码、`neurospec-agent`、数据集、训练划分、配置、实验结果或论文材料。
-- 未复制 `.env`、密钥、Token 或凭据。
-- 示例响应使用显式 `example` 标记和人工数据，不宣称为真实运行结果。
+## 未纳入仓库
 
-高信号密钥模式、本地主机名、绝对 Windows 路径和私有项目标记扫描均无命中。原知识库 ID 与原 HTTP URL 也已通过结构化检查确认未出现在公开 DSL 中。
+- PaviaU 或其他数据集文件。
+- 固定训练、验证和测试划分。
+- SFFS、实验流水线、调参流程、检查点和实验结果。
+- 本机科研项目路径、配置文件和未发表材料。
+- `.env`、API Key、Token、密码、证书或私钥。
 
-## 源路径检查
+## 脱敏和边界
 
-首选的作品集父目录中不存在 `论文总结助手.yml`，在指定的项目根目录下也未找到同名 YAML。本次使用用户随消息提供的 `<Downloads>/论文总结助手.yml` 作为只读候选源。此回退需要仓库所有者确认；公开报告不保留用户名或绝对本地路径。
+- Dify 知识库 ID 使用 `REBIND_KNOWLEDGE_BASE_AFTER_IMPORT`。
+- DSL 的 HTTP URL 使用 `https://researchpilot-api.example.invalid/select-bands`。
+- 公开 API 接受与 Dify 相同的 `PaviaU / method / k` 请求契约，但明确返回 `demo=true` 和 `data_source=synthetic`。
+- 算法实现是真实可执行代码；公开接口输出来自合成数据，不是 PaviaU 实验结果。
 
-按敏感文件名模式检查原后端和私有科研项目时，未发现 `.env`、常见私钥或凭据命名文件；该结论不等于内容级安全保证，且没有读取任何真实凭据内容。
+## 扫描结果
 
-## 发布阻断项
+- 新增后端和测试中没有数据文件、模型权重或实验结果文件。
+- 高信号凭据扫描无实际凭据命中；测试文件中只存在用于检测私钥的正则表达式文本。
+- 公开 DSL 中没有本地 Docker 主机名、回环地址或原知识库 ID。
+- 公开文件中没有原科研项目的绝对 Windows 路径。
 
-1. 尚未在 Dify UI 中验证公开 DSL 可成功导入。
-2. 公开 DSL 的知识库与 HTTP URL 是占位配置，导入后不可直接运行。
-3. 截图尚未生成和人工脱敏。
-4. 提交前仍需对 Git 暂存区执行一次独立秘密扫描与人工复核。
+## 功能限制
 
-## 结论
-
-当前目录适合作为待审核的公开作品集候选，但在上述阻断项完成前不能直接宣称“开箱即用”或直接公开发布。
+- 知识库、LLM 和部署后的 HTTP 地址仍需在目标 Dify 环境配置。
+- 公开 API 用合成数据验证接口和算法调用链，不复现论文实验。
+- 数据使用权、部署凭据和真实科研运行环境不属于本仓库。
 

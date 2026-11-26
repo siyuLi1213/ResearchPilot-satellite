@@ -9,9 +9,9 @@ flowchart LR
     C -->|代码问题| Q[代码问答 LLM]
     C -->|波段选择任务| H[HTTP Request]
     H --> A[FastAPI /select-bands]
-    A --> P[波段选择服务适配层]
-    P --> N[neurospec-agent]
-    N --> D[(授权数据与固定训练划分)]
+    A --> P[公开演示适配层]
+    P --> N[原科研项目的六种传统选带算法]
+    N --> D[(确定性合成数据)]
     A --> B[结果解释 LLM]
     R --> O[输出]
     Q --> O
@@ -42,12 +42,13 @@ flowchart LR
 - 浏览器与 Dify 负责交互和确定性工作流编排。
 - Dify 知识检索节点负责从重新绑定的论文知识库召回上下文；公开仓库不含知识库内容和真实 ID。
 - LLM 节点负责分类、论文回答、代码回答和接口结果解释；模型凭据由部署者在 Dify 中配置。
-- FastAPI 只暴露受控请求模型和算法调用入口，服务适配层提供 `/health` 与 `POST /select-bands`。
-- `neurospec-agent` 与服务适配代码可以在完成授权和安全复核后发布；数据文件、凭据和未发表实验材料仍不纳入本仓库。
+- FastAPI 提供 `/health` 与 `POST /select-bands`，并用 Pydantic 校验请求和响应。
+- 公开模块原样收录科研项目中实际使用的 Fisher、mRMR、MVPCA、Information Entropy、Random 和 Uniform 实现；FastAPI 适配层不改写算法公式。
+- 演示适配层仅生成确定性合成训练矩阵；数据文件、固定划分、凭据和未发表实验材料不纳入仓库。
 
 ## 波段选择数据流
 
-公开 DSL 的 HTTP 节点固定发送 `dataset=PaviaU`、`method=fisher`、`k=10`。FastAPI 校验请求后调用波段选择服务适配层，再返回索引和运行元数据。示例响应不来自现场执行，不代表任何论文指标。
+公开 DSL 的 HTTP 节点固定发送 `dataset=PaviaU`、`method=fisher`、`k=10`。公开 FastAPI 接收同一契约，但会在合成矩阵上运行真实算法，并在响应中返回 `demo=true`、`data_source=synthetic` 和非 PaviaU 结果说明。该响应不代表论文实验指标。
 
 ## 可迁移性说明
 

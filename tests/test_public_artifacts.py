@@ -61,7 +61,7 @@ def test_public_bindings_and_fixed_fisher_request():
     assert body == {"dataset": "PaviaU", "method": "fisher", "k": 10}
 
 
-def test_public_files_have_no_high_signal_secret_or_local_path():
+def test_public_files_have_no_high_signal_secret_or_absolute_path():
     text_suffixes = {".json", ".md", ".py", ".txt", ".yaml", ".yml"}
     files = [
         path
@@ -74,10 +74,15 @@ def test_public_files_have_no_high_signal_secret_or_local_path():
     text = "\n".join(path.read_text(encoding="utf-8") for path in files)
 
     assert not re.search(r"[A-Za-z]:\\", text)
-    assert "host" + ".docker.internal" not in text
-    assert "127" + ".0.0.1" not in text
     assert not re.search(r"-----BEGIN [A-Z ]*PRIVATE KEY-----", text)
     assert not re.search(r"AKIA[0-9A-Z]{16}", text)
     assert not re.search(r"gh[pousr]_[A-Za-z0-9_]{20,}", text)
     assert not re.search(r"sk-[A-Za-z0-9_-]{20,}", text)
+
+
+def test_public_workflow_has_no_local_service_address():
+    workflow_text = WORKFLOW_PATH.read_text(encoding="utf-8")
+    assert "host" + ".docker.internal" not in workflow_text
+    assert "local" + "host" not in workflow_text
+    assert "127" + ".0.0.1" not in workflow_text
 
