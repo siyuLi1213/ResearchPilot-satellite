@@ -2,7 +2,7 @@
 
 from fastapi import FastAPI
 
-from .mock_selector import run_demo_selection
+from .demo_selector import run_demo_selection
 from .schemas import BandSelectionRequest, BandSelectionResponse
 
 

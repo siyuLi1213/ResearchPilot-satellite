@@ -86,3 +86,22 @@ def test_public_workflow_has_no_local_service_address():
     assert "local" + "host" not in workflow_text
     assert "127" + ".0.0.1" not in workflow_text
 
+
+def test_readme_image_paths_exist_and_cover_screenshots():
+    readme_text = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
+    references = set(re.findall(r"!\[[^\]]*\]\(([^)]+)\)", readme_text))
+    local_references = {item for item in references if "://" not in item}
+    for relative_path in local_references:
+        assert (PROJECT_ROOT / relative_path).is_file(), relative_path
+
+    screenshots = {
+        path.relative_to(PROJECT_ROOT).as_posix()
+        for path in (PROJECT_ROOT / "screenshots").glob("*")
+        if path.suffix.lower() in {".gif", ".jpeg", ".jpg", ".png", ".webp"}
+    }
+    assert screenshots == local_references
+
+
+def test_duplicate_workflow_image_is_removed():
+    assert not (PROJECT_ROOT / "workflow" / "workflow.png").exists()
+

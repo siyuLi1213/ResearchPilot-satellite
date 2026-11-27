@@ -1,6 +1,6 @@
 # 安全审查
 
-审查日期：2026-11-26（Asia/Seoul）
+审查日期：2026-11-27（Asia/Seoul）
 
 ## 公开范围
 
@@ -27,9 +27,18 @@
 ## 扫描结果
 
 - 新增后端和测试中没有数据文件、模型权重或实验结果文件。
-- 高信号凭据扫描无实际凭据命中；测试文件中只存在用于检测私钥的正则表达式文本。
+- 当前文件及 13 个 Git 历史提交的高信号凭据扫描无实际凭据命中；测试文件中只存在用于检测凭据的正则表达式文本。
 - 公开 DSL 中没有本地 Docker 主机名、回环地址或原知识库 ID。
 - 公开文件中没有原科研项目的绝对 Windows 路径。
+
+## 截图人工检查
+
+- `workflow.png`：公开 Dify 工作流结构完整，HTTP 节点显示脱敏占位地址。
+- `rag-trace.png`：显示真实 RAG 执行追踪及本地 Docker 联调地址 `host.docker.internal`；未显示凭据、知识库 ID 或绝对文件路径。
+- `rag-result.png`：显示论文问答结果，未显示凭据或未公开实验指标。
+- `fastapi-swagger-result.png`：来自真实 FastAPI Swagger 请求，响应明确标注合成数据 Demo，不描述为 Mock 或 PaviaU 运行结果。
+- `Fastapi-result.png`：原始私有环境的真实 PaviaU/Fisher Swagger 200 响应；未显示凭据、训练样本内容或分类指标，README 未将其描述为 Mock 或公开 Demo。
+- `Fastapi-demo.png`：Dify HTTP 分支调用原始 FastAPI 的真实执行追踪；未显示凭据，README 明确其私有环境边界。
 
 ## 功能限制
 

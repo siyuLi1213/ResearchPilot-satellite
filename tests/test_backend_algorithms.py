@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from backend.mock_selector import build_synthetic_training_data
+from backend.demo_selector import build_synthetic_training_data
 from backend.neurospec.baselines.fisher_bs import compute_fisher_scores
 from backend.selector_registry import METHODS, select_bands
 
