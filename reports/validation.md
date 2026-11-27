@@ -20,7 +20,7 @@
 | Fisher 合成测试 | PASS | 可分离波段获得最高得分 |
 | Random 复现性 | PASS | 固定种子得到一致结果 |
 | 演示结果标记 | PASS | 响应包含 `demo=true`、`data_source=synthetic` 和非 PaviaU 声明 |
-| 敏感信息扫描 | PASS | 无真实凭据、绝对科研路径、数据或结果文件 |
+| 敏感信息扫描 | PASS | 无真实凭据、绝对科研路径、原始数据或结构化实验结果文件 |
 
 测试命令：
 

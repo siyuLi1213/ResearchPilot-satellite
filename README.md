@@ -132,7 +132,7 @@ ResearchPilot-satellite/
 ## 项目限制
 
 - 公开 DSL 中的知识库 ID 和 HTTP URL 是安全占位值，导入后必须重新绑定。
-- 仓库不包含 API Key、模型凭据、PaviaU 数据、训练划分、实验结果或未发表论文材料。
+- 仓库不包含 API Key、模型凭据、PaviaU 原始数据、训练划分、完整结构化实验结果或未发表性能指标；仅保留已明确标注边界的历史接口联调截图。
 - 知识库、LLM 和部署后的 FastAPI 地址需要在目标环境重新配置。
 - 当前项目是预定义的 Dify Workflow，不是自主 Agent Harness，也未使用 LangGraph。
 
